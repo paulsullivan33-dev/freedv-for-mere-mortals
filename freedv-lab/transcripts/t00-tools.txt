@@ -1,0 +1,35 @@
+$ apt-cache policy codec2 freedv   (Ubuntu 24.04 archive)
+codec2:
+  Candidate: 1.2.0-2build1
+freedv:
+  Candidate: 1.8.11-1build4
+
+$ dpkg -c codec2_1.2.0-2build1_amd64.deb | grep usr/bin   (the tools the distro package ships)
+usr/bin/c2dec
+usr/bin/c2enc
+usr/bin/fdmdv_demod
+usr/bin/fdmdv_get_test_bits
+usr/bin/fdmdv_mod
+usr/bin/fdmdv_put_test_bits
+usr/bin/fsk_mod
+Note: c2enc and c2dec are there. freedv_tx and freedv_rx are NOT in the package.
+
+$ cmake ../src/codec2-1.2.0 -DCMAKE_BUILD_TYPE=Release -DLPCNET=OFF -DUNITTEST=OFF && make freedv_tx freedv_rx c2enc c2dec
+(official codec2 1.2.0 source, same version as the distro package; LPCNet off, so the 2020 modes are not built)
+... build completes; the four tools land in build/src/
+build/src/c2dec
+build/src/c2enc
+build/src/freedv_rx
+build/src/freedv_tx
+
+$ freedv_tx   (no arguments: the usage text)
+usage: build/src/freedv_tx [options] 1600|700C|700D|700E|2400A|2400B|800XA InputRawSpeechFile OutputModemRawFile
+
+  --clip         0|1  Clipping (compression) of modem output samples for reduced PAPR
+                      and higher average power
+  --reliabletext txt  Send 'txt' using reliable text protocol
+  --testframes        Send testframe instead of coded speech. Number of testsframes depends on
+                      length of speech input file
+  --txbpf        0|1  Bandpass filter
+
+example: $ build/src/freedv_tx 1600 hts1a.raw hts1a_fdmdv.raw

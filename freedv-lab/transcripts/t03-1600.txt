@@ -1,0 +1,7 @@
+$ freedv_tx 1600 speech-8k.raw tx-1600.raw && freedv_rx 1600 tx-1600.raw rx-1600.raw
+frames decoded: 343  output speech samples: 51200
+
+$ python3 measure.py freedv-1600.wav decoded-1600.wav
+freedv-1600.wav: 8000 Hz, 1 ch, 16-bit, 54400 samples, 6.80 s, RMS -19.0 dBFS, peak -5.7 dBFS, nonzero 100%
+decoded-1600.wav: 8000 Hz, 1 ch, 16-bit, 51200 samples, 6.40 s, RMS -21.6 dBFS, peak -0.0 dBFS, nonzero 99%
+The receiver decodes fewer samples than went in: it skips some early frames while it locks onto the signal.

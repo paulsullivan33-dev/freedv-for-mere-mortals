@@ -1,0 +1,7 @@
+$ c2enc 700C speech-8k.raw speech-700c.bit   (the codec alone, no modem)
+680 speech-700c.bit
+680 bytes for 6.84 s of speech: 171 frames of 40 ms, 4 bytes a frame — about 700 bit/s plus framing.
+
+$ c2dec 700C speech-700c.bit rx-700c.raw
+108800 rx-700c.raw
+108800 bytes = 54400 samples = 6.80 s of decoded speech samples.

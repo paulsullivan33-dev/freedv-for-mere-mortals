@@ -1,0 +1,17 @@
+$ python3 -c "..." — take the WAV body out as headerless raw samples
+speech-8k.raw: 109396 bytes of raw 16-bit 8000 Hz samples
+
+$ freedv_tx 700D speech-8k.raw tx-700d.raw
+exit 0
+
+$ freedv_rx 700D tx-700d.raw rx-700d.raw
+frames decoded: 42  output speech samples: 53760
+
+$ file tx-700d.raw    (the modem file has no WAV header — it is raw samples)
+tx-700d.raw: data
+
+$ python3 measure.py speech-8k.wav freedv-700d.wav decoded-700d.wav
+(freedv-700d.wav and decoded-700d.wav are the two raw files wrapped in a WAV header by a short Python step, so the measuring script can read them)
+speech-8k.wav: 8000 Hz, 1 ch, 16-bit, 54698 samples, 6.84 s, RMS -20.9 dBFS, peak -0.0 dBFS, nonzero 79%
+freedv-700d.wav: 8000 Hz, 1 ch, 16-bit, 53760 samples, 6.72 s, RMS -16.3 dBFS, peak -6.0 dBFS, nonzero 100%
+decoded-700d.wav: 8000 Hz, 1 ch, 16-bit, 53760 samples, 6.72 s, RMS -22.5 dBFS, peak -1.0 dBFS, nonzero 100%

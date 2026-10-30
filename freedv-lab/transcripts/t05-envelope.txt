@@ -1,0 +1,12 @@
+$ python3 envelope.py speech-8k.raw rx-700d.raw
+unaligned correlation: -0.21
+best correlation 0.86 with decoded shifted by -350 ms
+
+$ python3 envelope.py speech-8k.raw rx-1600.raw
+unaligned correlation: 0.19
+best correlation 0.89 with decoded shifted by +200 ms
+
+$ python3 envelope.py speech-8k.raw rx-700c.raw
+unaligned correlation: 0.75
+best correlation 0.78 with decoded shifted by -50 ms
+Read: the decoded loud-and-quiet pattern follows the original closely (1.0 would be perfect), once the constant decode delay is allowed for. Without the shift, the 700D comparison scores -0.21 — the delay alone destroys the naive check.

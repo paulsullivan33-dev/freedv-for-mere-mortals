@@ -1,0 +1,13 @@
+$ python3 add-noise.py — mixes gaussian noise into tx-700d.raw at a stated signal-to-noise ratio (full 8 kHz band, seed 42)
+SNR 10 dB: signal RMS 5000, noise RMS 1581
+SNR  2 dB: signal RMS 5000, noise RMS 3971
+
+$ freedv_rx 700D tx-700d-noise10.raw rx-noise10.raw
+frames decoded: 42  output speech samples: 53760
+$ freedv_rx 700D tx-700d-noise2.raw rx-noise2.raw
+frames decoded: 42  output speech samples: 53760
+
+$ python3 envelope.py speech-8k.raw rx-noise2.raw
+unaligned correlation: -0.21
+best correlation 0.87 with decoded shifted by -350 ms
+All 42 frames decode at both noise levels, and the speech pattern survives the 2 dB run essentially intact.

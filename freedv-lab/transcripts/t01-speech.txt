@@ -1,0 +1,12 @@
+$ espeak-ng --version
+eSpeak NG text-to-speech: 1.51  Data at: /usr/lib/x86_64-linux-gnu/espeak-ng-data
+
+$ espeak-ng -w speech-native.wav "CQ CQ, this is November Zero Call. Free DV turns a voice into data, and data back into a voice."
+(the sentence is spoken; espeak-ng writes a 22050 Hz WAV)
+
+$ python3 resample8k.py speech-native.wav speech-8k.wav
+in: 22050 Hz 150762 samples (6.84 s) -> out: 8000 Hz 54698 samples (6.84 s)
+
+$ python3 measure.py speech-native.wav speech-8k.wav
+speech-native.wav: 22050 Hz, 1 ch, 16-bit, 150762 samples, 6.84 s, RMS -20.8 dBFS, peak -0.0 dBFS, nonzero 79%
+speech-8k.wav: 8000 Hz, 1 ch, 16-bit, 54698 samples, 6.84 s, RMS -20.9 dBFS, peak -0.0 dBFS, nonzero 79%
